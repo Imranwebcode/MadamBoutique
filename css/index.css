@@ -1,8 +1,9 @@
 .card-body a{
     display: none;
 }
+
 .card:hover .card-body a{
-    transition: 1s ease;
+    transition: all ease 0.5s;
     display: block;
 }
 .searchbtn{
@@ -19,7 +20,7 @@
 *{
     margin: 0px;
     padding: 0px;
-    font-family: poppins;
+    font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
 }
 a{
