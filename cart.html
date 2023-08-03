@@ -4,24 +4,63 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Men's Collection</title>
+    <title>Madam Boutique</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/fontawesome.min.css" integrity="sha512-cHxvm20nkjOUySu7jdwiUxgGy11vuVPE9YeK89geLMLMMEOcKFyS2i+8wo0FOwyQO/bL8Bvq1KMsqK4bbOsPnA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="images/x-icon" href="IMAGES/LOGO FOR TITLE BAR.png" width="30px" />  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <div id="navi"></div>
 
-    <div class="row" id="row">
 
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 bg-light mt-5 mb-5 p-3">
+                <div class="row">
+                    <div class=" col-lg-4  mt-5 ps-5">
+                        <h4 id="name"></h4>
+                        <p id="desc"></p> 
+                        
+                    </div>
+                    <div class="col-lg-4 mt-5">
+                        <h6>Qty</h6>
+                        <input type="number" value="1">
+                    </div>
+                    <div class="col-lg-4">
+
+                        <img src="" class="float-end"  width="130px" height="150px" alt="" id="img">
+                    </div>
+
+                </div>
+                <div class="row mt-5">
+                    <div class=" col-lg-4  mt-5 ps-5">
+                        <h4 id="name"></h4>
+                        <p id="desc"></p> 
+                        
+                    </div>
+                    <div class="col-lg-4 mt-5">
+                        <h6>Qty</h6>
+                        <input type="number" value="1">
+                    </div>
+                    <div class="col-lg-4">
+
+                        <img src="" class="float-end"  width="130px" height="150px" alt="" id="img">
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 
+
+
     <div id="footer"></div>
-      <script>
+    <script>
         $.get("nav.html",function(response){
             $("#navi").html(response);
         })
@@ -30,30 +69,20 @@
             $("#footer").html(response);
         })
 
+
+        const urlParams = new URLSearchParams(window.location.search); //query string
+        const cat = urlParams.get('category');
+        const id = urlParams.get('id');
         $.get("js/data.json",function(response){
             console.log(response);
             for(i of response){
-                if(i.category == "men"){
-                    $("#row").append(`
-                    <div class="col-3 mt-3">
-                        <div class="card border-0"  style="width: 21rem;">
-                        <a href="productDetail.html?category=men&id=${i.id}"><img src="IMAGES/${i.imgsrc}" class="card-img-top" alt="..."></a>
-                        <div class="card-body">
-                            <h6 class="card-title">${i.name}</h6>
-                            <h6 class="card-title">${i.desc}</h6>
-                            <div class="d-flex">
-                            <p class="card-text">Rs.${i.price}</p>
-                            <a href="productDetail.html?category=men&id=${i.id}" class="position-absolute text-light bg-dark rounded-5 top-0 left-25 p-1 ps-2" style="height:30px;width:30px"><i class="bi bi-eye"></i></a>
-                            <a href="productDetail.html?category=men&id=${i.id}" class="ms-5 btn btn-dark text-light rounded-2 fw-bold">ADD TO BAG</a>
-                            
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    `)
+                if(i.category == cat && i.id == id){
+                    $("#img").attr("src","images/"+i.imgsrc);
+                    $("#name").text(i.name);
+                    $("#desc").text(i.desc);
                 }
             }
         })
-      </script>
+    </script>
 </body>
 </html>
