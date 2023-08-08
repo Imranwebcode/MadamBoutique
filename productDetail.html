@@ -13,13 +13,81 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/fontawesome.min.css" integrity="sha512-cHxvm20nkjOUySu7jdwiUxgGy11vuVPE9YeK89geLMLMMEOcKFyS2i+8wo0FOwyQO/bL8Bvq1KMsqK4bbOsPnA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" type="images/x-icon" href="IMAGES/LOGO FOR TITLE BAR.png" width="30px" />  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="css/detail.css">
 </head>
 <body>
-    <img src="" id="img" width="500px" height="550px" alt="">
-    <h1 class="fw-bold float-end" id="name"></h1>
-    <h2 class="fw-light float-end" id="desc"></h2>
+    <!-- <h1 class="fw-bold float-end" id="name"></h1>
+    <h2 class="fw-light float-end" id="desc"></h2> -->
+
+    <div id="navi"></div>
+
+   	<div class="container ">
+		<div class="card">
+			<div class="container-fliud">
+				<div class="wrapper row">
+					<div class="preview col-md-6">
+						
+						<div class="preview-pic tab-content">
+						  <div class="tab-pane active" id="pic-1"><img src="" id="img" /></div>
+						  <div class="tab-pane" id="pic-2"><img src="" id="img" /></div>
+						  <div class="tab-pane" id="pic-3"><img src="" id="img" /></div>
+						  <div class="tab-pane" id="pic-4"><img src="" id="img" /></div>
+						  <div class="tab-pane" id="pic-5"><img src="" id="img" /></div>
+						</div>
+						<ul class="preview-thumbnail nav nav-tabs">
+						  <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="" class="img" /></a></li>
+						  <li><a data-target="#pic-2" data-toggle="tab"><img src="" class="img"/></a></li>
+						  <li><a data-target="#pic-3" data-toggle="tab"><img src="" class="img"/></a></li>
+						  <li><a data-target="#pic-4" data-toggle="tab"><img src="" class="img"/></a></li>
+						  <li><a data-target="#pic-5" data-toggle="tab"><img src="" class="img"/></a></li>
+						</ul>
+						
+					</div>
+					<div class="details col-md-6">
+						<h3 class="product-title" id="name"></h3>
+						<div class="rating">
+							<div class="stars">
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+							</div>
+							<span class="review-no">41 reviews</span>
+						</div>
+						<p class="product-description" id="desc"></p>
+						<h4 class="price">current price: PKR <span id="price">180</span></h4>
+						<p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
+						<h5 class="sizes">sizes:
+							<span class="size" data-toggle="tooltip" title="small">s</span>
+							<span class="size" data-toggle="tooltip" title="medium">m</span>
+							<span class="size" data-toggle="tooltip" title="large">l</span>
+							<span class="size" data-toggle="tooltip" title="xtra large">xl</span>
+						</h5>
+						<h5 class="colors">colors:
+							<span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
+							<span class="color green"></span>
+							<span class="color blue"></span>
+						</h5>
+						<div class="action">
+							<a class="add-to-cart btn btn-default" href=""  id="cart" type="button">add to cart</a>
+							<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <div id="footer" class="mt-5"></div>
 
     <script>
+        $.get("nav.html",function(response){
+            $("#navi").html(response);
+        })
+
+        $.get("footer.html",function(response){
+            $("#footer").html(response);
+        })
         const urlParams = new URLSearchParams(window.location.search); //query string
         const cat = urlParams.get('category');
         const id = urlParams.get('id');
@@ -28,7 +96,10 @@
             for(i of response){
                 if(i.category == cat && i.id == id){
                     $("#img").attr("src","images/"+i.imgsrc);
+                    $(".img").attr("src","images/"+i.imgsrc);
                     $("#name").text(i.name);
+                    $("#cart").attr("href","cart.html?category="+i.category+"&id="+i.id);
+                    $("#price").text(i.price);
                     $("#desc").text(i.desc);
                 }
             }
