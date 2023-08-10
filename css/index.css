@@ -127,6 +127,14 @@ a{
         font-size: 1.4rem;
     }
 }
+
+@media(max-width:550px){
+    .card{
+        margin-left: 12%;
+    }
+}
+
+
 @media(max-width:340px){
     .box-top{
         flex-wrap: wrap;
